@@ -1,5 +1,5 @@
-FROM gcc:7.5.0
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-RUN g++ -o myapp app.cpp
-ENTRYPOINT ["./myapp"]
+FROM pypy:3
+WORKDIR /app
+COPY app.py .
+
+ENTRYPOINT ["pypy3", "app.py"]
