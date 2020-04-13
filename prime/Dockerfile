@@ -1,4 +1,5 @@
-FROM gcc
-COPY app /app/app
-WORKDIR /app
-ENTRYPOINT ["/app/app"]
+FROM gcc:7.5.0
+COPY . /usr/src/myapp
+WORKDIR /usr/src/myapp
+RUN g++ -o myapp app.cpp
+ENTRYPOINT ["./myapp"]
