@@ -1,5 +1,4 @@
-FROM pypy:3
+FROM gcc
+COPY app /app/app
 WORKDIR /app
-COPY app.py .
-
-ENTRYPOINT ["pypy3", "app.py"]
+ENTRYPOINT ["/app/app"]
