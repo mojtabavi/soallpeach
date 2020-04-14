@@ -6,14 +6,16 @@ using namespace std;
 
 int m=0;
 int num=0;
+int max_div;
+
 int isPrime(int n)
 {
     if (n <= 3)
         return 1;
     if (n % 2 == 0 || n % 3 == 0)
         return 0;
-
-    for (m = 5; m < (int)sqrt(n) + 1; m = m + 6)
+    max_div = (int)sqrt(n) +1 ;
+    for (m = 5; m < max_div; m = m + 6)
     {
         if (n % m == 0 || n % (m + 2) == 0)
             return 0;
