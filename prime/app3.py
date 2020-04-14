@@ -14,8 +14,8 @@ def is_prime(n):
     if n % 3 == 0:
         return 0
 
-    
-    for m in range(5, int(sqrt(n))+1, 6):
+    max_dev = int(sqrt(n)) + 1
+    for m in range(5, max_dev, 6):
         if n % m == 0 or n % (m + 2) ==0:
             return 0
     
