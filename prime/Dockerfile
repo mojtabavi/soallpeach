@@ -1,4 +1,4 @@
 FROM gcc
-COPY app /app/app3
+COPY app3 /app/app3
 WORKDIR /app
-ENTRYPOINT ["/app/app"]
+ENTRYPOINT ["/app/app3"]
