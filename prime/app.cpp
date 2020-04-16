@@ -10,6 +10,7 @@ int num=0;
 
 static int isPrime(int n)
 {
+	//new algo
     if (n <= 3)
         return 1;
     if (n % 2 == 0 || n % 3 == 0)
