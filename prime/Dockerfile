@@ -1,4 +1,5 @@
-FROM gcc
-COPY app3 /app/app3
+FROM gcc:latest
+COPY . /app
 WORKDIR /app
-ENTRYPOINT ["/app/app3"]
+RUN g++ app.cpp -oprime -ffast-math -O3 -D_GNU_SOURCE
+ENTRYPOINT ["./prime"]
