@@ -1,3 +1,11 @@
+#include <sys/types.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -30,14 +38,31 @@ static int isPrime(int n)
 
 int main(int argc, char** argv)
 {
-    ifstream infile(argv[1]);
-    while (infile >> num)
-    {
+    int n = 0;
+    struct stat fs;
+    int fid = open(argv[1], O_RDONLY | O_DIRECT);
+    size_t fsize = 100*32 * (512 + 1) * 4;
+    char* fcontent = static_cast<char*>(mmap(NULL, fsize, PROT_READ,
+                          MAP_FILE | MAP_PRIVATE | MAP_POPULATE,
+                          fid, 0));
 
-        printf("%d\n", isPrime(num));
-    }
 
-    
-    infile.close();
+
+    do {
+        // fgets and atoi
+        if (*fcontent > '\n') {
+            n = (n << 1) + (n << 3) + *fcontent++ - '0';
+            continue;
+        } else if (*fcontent++ == 0 && n == 0)
+            break;
+
+        // check primality of n
+        printf("%d\n" , isPrime(n));
+
+        n = 0;
+    } while (1);
+
+
+    close(fid);
     return 0;
 }
