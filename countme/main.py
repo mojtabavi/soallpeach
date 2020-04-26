@@ -2,22 +2,22 @@ from flask import Flask, request
 
 application = Flask(__name__)
 
-global sum_of_requests
-sum_of_requests = 0
+global sum_number
+sum_number = 0
 
 
 @application.route('/count')
 def count():
-    global sum_of_requests
-    return str(sum_of_requests)
+    global sum_number
+    return str(sum_number)
 
 
 @application.route('/', methods=['POST'])
 def index():
-    global sum_of_requests
-    in_number = int(request.stream.read())
-    sum_of_requests += in_number
-    return str(sum_of_requests)
+    global sum_number
+    number = int(request.stream.read())
+    sum_number += number
+    return str(sum_number)
 
 
 if __name__ == '__main__':
